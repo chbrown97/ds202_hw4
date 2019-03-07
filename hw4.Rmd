@@ -1,0 +1,48 @@
+---
+title: "hw4"
+output: html_document
+---
+Colin Brown
+
+```{r}
+# 1.
+
+library(datasets)
+library(dplyr)
+
+chicks <- ChickWeight
+summary(chicks)
+
+weight0 <- chicks %>% filter(Time==0)
+weight0 %>%
+  group_by(Diet) %>%
+  summarize(Count = n_distinct(Chick),
+            meanWeight = mean(weight),
+            sdWeight = sd(weight))
+
+print(weight0)
+```
+
+```{r}
+# 2.
+
+complete <- chicks
+complete %>%
+  group_by(Chick) %>%
+  add_tally() %>%
+  filter(n==12) %>%
+  head(3)
+```
+
+```{r}
+# 3.
+
+chicks %>%
+  group_by(Chick) %>%
+  mutate(weightgain = weight - weight[Time==0]) %>%
+  head(3)
+```
+
+```{r}
+
+```
